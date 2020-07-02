@@ -30,7 +30,7 @@ public class SunFragment extends Fragment {
     private TextView dawn_time;
 
     public SunFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -51,7 +51,9 @@ public class SunFragment extends Fragment {
         dawn_time = view.findViewById(R.id.dawn_time);
 
         Data data  = loadData();
-        refreshData(new Info(data.getLongitude(),data.getLatitude()),  data.getDelay());
+        Info info = new Info(data.getLongitude(),data.getLatitude());
+        setText(info.getSunInfo());
+        refreshData(info, data.getDelay());
 
         return view;
     }
