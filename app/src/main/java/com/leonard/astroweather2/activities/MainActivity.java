@@ -53,13 +53,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Data loadData() {
-        Data result = new Data();
-        SharedPreferences sharedPreferences = getSharedPreferences(DataNames.SETTINGS.toString(), MODE_PRIVATE);
-        result.setLongitude(sharedPreferences.getString(DataNames.LONGITUDE.toString(), "19.8286"));
-        result.setLatitude(sharedPreferences.getString(DataNames.LATITUDE.toString(), "51.5008"));
-        result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 2));
-        return result;
-    }
-
 }
