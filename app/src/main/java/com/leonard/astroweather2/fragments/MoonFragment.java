@@ -16,6 +16,7 @@ import com.leonard.astroweather2.R;
 import com.leonard.astroweather2.models.astro_info.Info;
 import com.leonard.astroweather2.models.enums.DataNames;
 import com.leonard.astroweather2.models.settings.Data;
+import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -49,7 +50,7 @@ public class MoonFragment extends Fragment {
         phase = view.findViewById(R.id.phase);
         synodic_month_day = view.findViewById(R.id.synodic_month_day);
 
-        Data data  = loadData();
+        Data data  = SharedPreferencesOperations.loadData(this.getContext());
         Info info = new Info(data.getLongitude(),data.getLatitude());
         setText(info.getMoonInfo());
         refreshData(info, data.getDelay());
@@ -77,15 +78,6 @@ public class MoonFragment extends Fragment {
         moon_new.setText(moonInfo.getNextNewMoon().getDay() +"."+ moonInfo.getNextNewMoon().getMonth() +"."+ moonInfo.getNextNewMoon().getYear());
         phase.setText(String.valueOf(moonInfo.getAge()));
         synodic_month_day.setText(String.valueOf(moonInfo.getIllumination()*100));
-    }
-
-    private Data loadData() {
-        Data result = new Data();
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(DataNames.SETTINGS.toString(), MODE_PRIVATE);
-        result.setLongitude(sharedPreferences.getString(DataNames.LONGITUDE.toString(), "19.8286"));
-        result.setLatitude(sharedPreferences.getString(DataNames.LATITUDE.toString(), "51.5008"));
-        result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 2));
-        return result;
     }
 
 }

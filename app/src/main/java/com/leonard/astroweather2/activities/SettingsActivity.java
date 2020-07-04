@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.leonard.astroweather2.models.enums.DataNames;
 import com.leonard.astroweather2.models.settings.Data;
 import com.leonard.astroweather2.R;
+import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,32 +46,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         submit = findViewById(R.id.submit);
         submit.setOnClickListener(this);
 
-        data = loadData();
+        data = SharedPreferencesOperations.loadData(this);
         setTextOnFields(data);
 
     }
 
-    public void setTextOnFields(Data data) {
+    private void setTextOnFields(Data data) {
         longitude.setText(data.getLongitude());
         latitude.setText(data.getLatitude());
         delay.setText(String.valueOf(data.getDelay()));
-    }
-
-    public Data loadData() {
-        Data result = new Data();
-        SharedPreferences sharedPreferences = getSharedPreferences(DataNames.SETTINGS.toString(), MODE_PRIVATE);
-        result.setLongitude(sharedPreferences.getString(DataNames.LONGITUDE.toString(), "19.8286"));
-        result.setLatitude(sharedPreferences.getString(DataNames.LATITUDE.toString(), "51.5008"));
-        result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 2));
-        return result;
-    }
-
-    private void updateSharedPreferences(Data data) {
-        SharedPreferences.Editor editor = getSharedPreferences(DataNames.SETTINGS.toString(),Context.MODE_PRIVATE).edit();
-        editor.putString( DataNames.LONGITUDE.toString() , data.getLongitude());
-        editor.putString( DataNames.LATITUDE.toString() , data.getLatitude());
-        editor.putInt( DataNames.DELAY.toString() , data.getDelay());
-        editor.apply();
     }
 
     private void updateData(Data data) {
@@ -79,13 +63,37 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         data.setDelay(Integer.parseInt(delay.getText().toString()));
     }
 
+    private boolean checkInput() {
+        double longVal;
+        double latVal;
+        int delayVal;
+
+        try {
+            longVal = Double.parseDouble(longitude.getText().toString());
+            latVal = Double.parseDouble(longitude.getText().toString());
+            delayVal = Integer.parseInt(delay.getText().toString());
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        if(longVal < -180 || longVal > 180)
+            return false;
+        if(latVal < -90 || latVal > 90)
+            return false;
+        if(delayVal < 1)
+            return false;
+
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.submit:
-                updateData(data);
-                updateSharedPreferences(data);
-                startActivity(new Intent(this, MainActivity.class));
+                if(checkInput()) {
+                    updateData(data);
+                    SharedPreferencesOperations.updateSharedPreferences(data, this);
+                    startActivity(new Intent(this, MainActivity.class));
+                }
                 break;
         }
     }

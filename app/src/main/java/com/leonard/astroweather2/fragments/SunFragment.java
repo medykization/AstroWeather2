@@ -16,6 +16,7 @@ import com.leonard.astroweather2.R;
 import com.leonard.astroweather2.models.astro_info.Info;
 import com.leonard.astroweather2.models.enums.DataNames;
 import com.leonard.astroweather2.models.settings.Data;
+import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -50,7 +51,7 @@ public class SunFragment extends Fragment {
         twilight_time = view.findViewById(R.id.twilight_time);
         dawn_time = view.findViewById(R.id.dawn_time);
 
-        Data data  = loadData();
+        Data data  = SharedPreferencesOperations.loadData(this.getContext());
         Info info = new Info(data.getLongitude(),data.getLatitude());
         setText(info.getSunInfo());
         refreshData(info, data.getDelay());
@@ -78,15 +79,6 @@ public class SunFragment extends Fragment {
         sunset_azim.setText(Double.toString(sunInfo.getAzimuthSet()));
         twilight_time.setText(sunInfo.getTwilightEvening().getHour() +":"+ sunInfo.getTwilightEvening().getMinute() +":"+ sunInfo.getTwilightEvening().getSecond());
         dawn_time.setText(sunInfo.getTwilightMorning().getHour() +":"+ sunInfo.getTwilightMorning().getMinute() +":"+ sunInfo.getTwilightMorning().getSecond());
-    }
-
-    private Data loadData() {
-        Data result = new Data();
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(DataNames.SETTINGS.toString(), MODE_PRIVATE);
-        result.setLongitude(sharedPreferences.getString(DataNames.LONGITUDE.toString(), "19.8286"));
-        result.setLatitude(sharedPreferences.getString(DataNames.LATITUDE.toString(), "51.5008"));
-        result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 2));
-        return result;
     }
 
 }

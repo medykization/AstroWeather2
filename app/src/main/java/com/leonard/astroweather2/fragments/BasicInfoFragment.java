@@ -14,6 +14,7 @@ import com.leonard.astroweather2.R;
 import com.leonard.astroweather2.models.astro_info.Info;
 import com.leonard.astroweather2.models.enums.DataNames;
 import com.leonard.astroweather2.models.settings.Data;
+import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -35,20 +36,11 @@ public class BasicInfoFragment extends Fragment {
         longitude = view.findViewById(R.id.longitudeInfo);
         latitude = view.findViewById(R.id.latitudeInfo);
 
-        Data data = loadData();
+        Data data = SharedPreferencesOperations.loadData(this.getContext());
         longitude.setText(data.getLongitude());
         latitude.setText(data.getLatitude());
-
 
         return view;
     }
 
-    private Data loadData() {
-        Data result = new Data();
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(DataNames.SETTINGS.toString(), MODE_PRIVATE);
-        result.setLongitude(sharedPreferences.getString(DataNames.LONGITUDE.toString(), "19.8286"));
-        result.setLatitude(sharedPreferences.getString(DataNames.LATITUDE.toString(), "51.5008"));
-        result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 2));
-        return result;
-    }
 }
