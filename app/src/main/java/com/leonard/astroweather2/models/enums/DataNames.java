@@ -6,4 +6,10 @@ public enum DataNames {
     LATITUDE,
     DELAY,
     CITY_NAME,
+    CITY_ID,
+    WIND_SPEED,
+    WIND_DIRECTION,
+    VISIBILITY,
+    HUMIDITY,
+    PRESSURE
 }

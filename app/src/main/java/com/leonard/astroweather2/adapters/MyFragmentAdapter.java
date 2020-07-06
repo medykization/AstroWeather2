@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.leonard.astroweather2.fragments.BasicInfoFragment;
+import com.leonard.astroweather2.fragments.ExtendWeatherInfoFragment;
 import com.leonard.astroweather2.fragments.MoonFragment;
 import com.leonard.astroweather2.fragments.SunFragment;
 
@@ -25,6 +26,8 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
                 return new SunFragment();
             case 2:
                 return new MoonFragment();
+            case 3:
+                return new ExtendWeatherInfoFragment();
             default:
                 return null;
         }
@@ -32,6 +35,6 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

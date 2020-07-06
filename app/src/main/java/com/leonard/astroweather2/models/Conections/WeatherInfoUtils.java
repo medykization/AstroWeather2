@@ -4,11 +4,14 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.leonard.astroweather2.models.enums.SecretData;
 import com.leonard.astroweather2.models.settings.City;
+import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,36 +19,41 @@ import org.json.JSONObject;
 public class WeatherInfoUtils {
 
 
-    public static City getWeatherInfo(final Context context, String cityName) {
-        final City[] result = new City[1];
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + SecretData.valueOf("API_KEY").toString();
+    public static void UpdateWeatherInfo(final Context context, final String cityName) {
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + SecretData.valueOf("API_KEY").getVal();
+
+        System.out.println(url);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        City city = null;
                         try {
-                            result[0] = new City(response.getString("name"),
-                                    response.getString("deg"),
-                                    response.getString("visibility"),
+                            city = new City(cityName,
+                                    response.getJSONObject("wind").getInt("deg"),
+                                    response.getInt("visibility"),
                                     response.getInt("id"),
-                                    response.getInt("humidity"),
-                                    response.getInt("speed"),
-                                    response.getInt("pressure"),
-                                    response.getDouble("lon"),
-                                    response.getDouble("lan"));
+                                    response.getJSONObject("main").getInt("humidity"),
+                                    response.getJSONObject("wind").getInt("speed"),
+                                    response.getJSONObject("main").getInt("pressure"),
+                                    response.getJSONObject("coord").getString("lon"),
+                                    response.getJSONObject("coord").getString("lat"));
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            System.out.println(e.toString());
                         }
+                        System.out.println(city);
+                        SharedPreferencesOperations.updateSharedPreferences(city,context);
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context, "Incorrect city name", Toast.LENGTH_SHORT).show();
                     }
                 });
-        return result[0];
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(jsonObjectRequest);
     }
 
 }

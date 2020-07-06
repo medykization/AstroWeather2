@@ -30,7 +30,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private Button submit;
 
     private Data data;
-    private City cityInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +56,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateData(Data data) {
-        data.setName(cityInfo.getName());
-        data.setLongitude(String.valueOf(cityInfo.getLongitude()));
-        data.setLatitude(String.valueOf(cityInfo.getLatitude()));
         data.setDelay(Integer.parseInt(delay.getText().toString()));
     }
 
     private boolean checkInput() {
         int delayVal;
-        cityInfo = WeatherInfoUtils.getWeatherInfo(this,city.getText().toString());
+        WeatherInfoUtils.UpdateWeatherInfo(this,city.getText().toString());
         try {
             delayVal = Integer.parseInt(delay.getText().toString());
         } catch (NumberFormatException e) {
@@ -73,7 +69,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
         if(delayVal < 1)
             return false;
-
         return true;
     }
 
@@ -87,6 +82,22 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                     startActivity(new Intent(this, MainActivity.class));
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        //This is used to hide/show 'Status Bar' & 'System Bar'. Swip bar to get it as visible.
+        View decorView = getWindow().getDecorView();
+        if (hasFocus) {
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
 

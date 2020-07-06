@@ -34,4 +34,14 @@ public class Data {
     public void setDelay(int delay) {
         this.delay = delay;
     }
+
+    @Override
+    public String toString() {
+        return "Data{" +
+                "longitude='" + longitude + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", name='" + name + '\'' +
+                ", delay=" + delay +
+                '}';
+    }
 }

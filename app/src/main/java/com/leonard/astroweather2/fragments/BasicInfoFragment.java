@@ -17,6 +17,7 @@ public class BasicInfoFragment extends Fragment {
 
     private TextView longitude;
     private TextView latitude;
+    private TextView city;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,12 +31,17 @@ public class BasicInfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_basic_info, container, false);
         longitude = view.findViewById(R.id.longitudeInfo);
         latitude = view.findViewById(R.id.latitudeInfo);
+        city = view.findViewById(R.id.city);
+        setTexts();
+        return view;
+    }
 
+    private void setTexts() {
         Data data = SharedPreferencesOperations.loadData(this.getContext());
+        System.out.println(data.toString());
         longitude.setText(data.getLongitude());
         latitude.setText(data.getLatitude());
-
-        return view;
+        city.setText(data.getName());
     }
 
 }
