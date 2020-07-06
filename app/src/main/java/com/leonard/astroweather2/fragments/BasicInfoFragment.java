@@ -1,6 +1,5 @@
 package com.leonard.astroweather2.fragments;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,12 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.leonard.astroweather2.R;
-import com.leonard.astroweather2.models.astro_info.Info;
-import com.leonard.astroweather2.models.enums.DataNames;
 import com.leonard.astroweather2.models.settings.Data;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class BasicInfoFragment extends Fragment {
 

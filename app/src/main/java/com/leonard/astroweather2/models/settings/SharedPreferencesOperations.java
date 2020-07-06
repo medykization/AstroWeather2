@@ -13,6 +13,7 @@ public class SharedPreferencesOperations {
         SharedPreferences.Editor editor = context.getSharedPreferences(DataNames.SETTINGS.toString(),Context.MODE_PRIVATE).edit();
         editor.putString( DataNames.LONGITUDE.toString() , data.getLongitude());
         editor.putString( DataNames.LATITUDE.toString() , data.getLatitude());
+        editor.putString( DataNames.CITY_NAME.toString() , data.getName());
         editor.putInt( DataNames.DELAY.toString() , data.getDelay());
         editor.apply();
     }
@@ -22,6 +23,7 @@ public class SharedPreferencesOperations {
         SharedPreferences sharedPreferences = context.getSharedPreferences(DataNames.SETTINGS.toString(), MODE_PRIVATE);
         result.setLongitude(sharedPreferences.getString(DataNames.LONGITUDE.toString(), "19.8286"));
         result.setLatitude(sharedPreferences.getString(DataNames.LATITUDE.toString(), "51.5008"));
+        result.setName(sharedPreferences.getString(DataNames.CITY_NAME.toString(), "ŁÓDŹ"));
         result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 2));
         return result;
     }

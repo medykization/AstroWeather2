@@ -4,5 +4,6 @@ public enum DataNames {
     SETTINGS,
     LONGITUDE,
     LATITUDE,
-    DELAY
+    DELAY,
+    CITY_NAME,
 }
