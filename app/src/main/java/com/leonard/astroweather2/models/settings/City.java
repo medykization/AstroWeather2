@@ -8,22 +8,41 @@ public class City {
     private int id;
     private int humidity; // wilgotność
     private double windSpeed;
+    private double temp;
     private int pressure;
     private String longitude;
     private String latitude;
+    private int delay;
 
     public City() {}
 
-    public City(String name, int windDirection, int visibility, int id, int humidity, double windSpeed, int pressure, String longitude, String latitude) {
+    public City(String name, int visibility, int windDirection, int id, int humidity, double windSpeed, double temp, int pressure, String longitude, String latitude) {
         this.name = name;
-        this.windDirection = windDirection;
         this.visibility = visibility;
+        this.windDirection = windDirection;
         this.id = id;
         this.humidity = humidity;
         this.windSpeed = windSpeed;
+        this.temp = temp;
         this.pressure = pressure;
         this.longitude = longitude;
         this.latitude = latitude;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    public double getTemp() {
+        return temp;
+    }
+
+    public void setTemp(double temp) {
+        this.temp = temp;
     }
 
     public String getLongitude() {
@@ -52,21 +71,6 @@ public class City {
 
     public int getVisibility() {
         return visibility;
-    }
-
-    @Override
-    public String toString() {
-        return "City{" +
-                "name='" + name + '\'' +
-                ", visibility=" + visibility +
-                ", windDirection=" + windDirection +
-                ", id=" + id +
-                ", humidity=" + humidity +
-                ", windSpeed=" + windSpeed +
-                ", pressure=" + pressure +
-                ", longitude='" + longitude + '\'' +
-                ", latitude='" + latitude + '\'' +
-                '}';
     }
 
     public void setVisibility(int visibility) {
@@ -111,5 +115,21 @@ public class City {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "name='" + name + '\'' +
+                ", visibility=" + visibility +
+                ", windDirection=" + windDirection +
+                ", id=" + id +
+                ", humidity=" + humidity +
+                ", windSpeed=" + windSpeed +
+                ", temp=" + temp +
+                ", pressure=" + pressure +
+                ", longitude='" + longitude + '\'' +
+                ", latitude='" + latitude + '\'' +
+                '}';
     }
 }

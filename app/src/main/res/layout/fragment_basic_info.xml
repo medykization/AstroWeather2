@@ -7,12 +7,15 @@
     android:padding="30sp"
     tools:context=".fragments.BasicInfoFragment">
 
+    <!--
     <TextClock
+        android:id="@+id/clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:format24Hour="hh:mm:ss"
-        android:textSize="40sp"
-        android:layout_gravity="center_horizontal"/>
+        android:textSize="40sp" />
+        -->
 
     <TableLayout
         android:layout_width="match_parent"
@@ -89,6 +92,32 @@
 
             <TextView
                 android:id="@+id/latitudeInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"

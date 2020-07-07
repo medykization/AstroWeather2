@@ -1,6 +1,5 @@
 package com.leonard.astroweather2.fragments;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,11 +13,8 @@ import android.widget.TextView;
 import com.astrocalculator.AstroCalculator;
 import com.leonard.astroweather2.R;
 import com.leonard.astroweather2.models.astro_info.Info;
-import com.leonard.astroweather2.models.enums.DataNames;
-import com.leonard.astroweather2.models.settings.Data;
+import com.leonard.astroweather2.models.settings.City;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
-
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class SunFragment extends Fragment {
@@ -51,10 +47,10 @@ public class SunFragment extends Fragment {
         twilight_time = view.findViewById(R.id.twilight_time);
         dawn_time = view.findViewById(R.id.dawn_time);
 
-        Data data  = SharedPreferencesOperations.loadData(this.getContext());
-        Info info = new Info(data.getLongitude(),data.getLatitude());
+        City cityInfo  = SharedPreferencesOperations.loadCity(this.getContext());
+        Info info = new Info(cityInfo.getLongitude(),cityInfo.getLatitude());
         setText(info.getSunInfo());
-        refreshData(info, data.getDelay());
+        refreshData(info, cityInfo.getDelay());
 
         return view;
     }

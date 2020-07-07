@@ -9,12 +9,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SharedPreferencesOperations {
 
-    public static void updateSharedPreferences(Data data, Context context) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(DataNames.SETTINGS.toString(),Context.MODE_PRIVATE).edit();
-        editor.putInt( DataNames.DELAY.toString() , data.getDelay());
-        editor.apply();
-    }
-
     public static void updateSharedPreferences(City city, Context context) {
         SharedPreferences.Editor editor = context.getSharedPreferences(DataNames.SETTINGS.toString(),Context.MODE_PRIVATE).edit();
         editor.putString( DataNames.LONGITUDE.toString() , city.getLongitude());
@@ -26,17 +20,8 @@ public class SharedPreferencesOperations {
         editor.putInt(DataNames.HUMIDITY.toString() , city.getHumidity());
         editor.putInt(DataNames.PRESSURE.toString() , city.getPressure());
         editor.putFloat(DataNames.WIND_SPEED.toString() ,(float) city.getWindSpeed());
+        editor.putFloat(DataNames.TEMP.toString() ,(float) city.getTemp());
         editor.apply();
-    }
-
-    public static Data loadData(Context context) {
-        Data result = new Data();
-        SharedPreferences sharedPreferences = context.getSharedPreferences(DataNames.SETTINGS.toString(), MODE_PRIVATE);
-        result.setLongitude(sharedPreferences.getString(DataNames.LONGITUDE.toString(), "19.8286"));
-        result.setLatitude(sharedPreferences.getString(DataNames.LATITUDE.toString(), "51.5008"));
-        result.setName(sharedPreferences.getString(DataNames.CITY_NAME.toString(), "Łódź"));
-        result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 2));
-        return result;
     }
 
     public static City loadCity(Context context) {
@@ -51,6 +36,8 @@ public class SharedPreferencesOperations {
         result.setVisibility(sharedPreferences.getInt(DataNames.VISIBILITY.toString(), 10000));
         result.setHumidity(sharedPreferences.getInt(DataNames.HUMIDITY.toString(), 72));
         result.setPressure(sharedPreferences.getInt(DataNames.PRESSURE.toString(), 1011));
+        result.setTemp(sharedPreferences.getFloat(DataNames.TEMP.toString(), 290.85F));
+        result.setDelay(sharedPreferences.getInt(DataNames.DELAY.toString(), 10));
         return result;
     }
 

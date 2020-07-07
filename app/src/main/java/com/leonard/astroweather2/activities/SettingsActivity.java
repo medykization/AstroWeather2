@@ -2,9 +2,7 @@ package com.leonard.astroweather2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.leonard.astroweather2.models.Conections.WeatherInfoUtils;
-import com.leonard.astroweather2.models.enums.DataNames;
-import com.leonard.astroweather2.models.settings.City;
-import com.leonard.astroweather2.models.settings.Data;
 import com.leonard.astroweather2.R;
+import com.leonard.astroweather2.models.settings.City;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -29,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private Button submit;
 
-    private Data data;
+    private City cityInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +41,23 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         submit = findViewById(R.id.submit);
         submit.setOnClickListener(this);
 
-        data = SharedPreferencesOperations.loadData(this);
-        setTextOnFields(data);
+        cityInfo = SharedPreferencesOperations.loadCity(this);
+        setTextOnFields(cityInfo);
 
     }
 
-    private void setTextOnFields(Data data) {
-        city.setText(data.getName());
-        delay.setText(String.valueOf(data.getDelay()));
+    private void setTextOnFields(City cityInfo) {
+        city.setText(cityInfo.getName());
+        delay.setText(String.valueOf(cityInfo.getDelay()));
     }
 
-    private void updateData(Data data) {
-        data.setDelay(Integer.parseInt(delay.getText().toString()));
+    private void updateData(City cityInfo) {
+        cityInfo.setDelay(Integer.parseInt(delay.getText().toString()));
     }
 
     private boolean checkInput() {
         int delayVal;
-        WeatherInfoUtils.UpdateWeatherInfo(this,city.getText().toString());
+        WeatherInfoUtils.updateWeatherInfo(this,city.getText().toString());
         try {
             delayVal = Integer.parseInt(delay.getText().toString());
         } catch (NumberFormatException e) {
@@ -77,8 +73,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.submit:
                 if(checkInput()) {
-                    updateData(data);
-                    SharedPreferencesOperations.updateSharedPreferences(data, this);
+                    updateData(cityInfo);
+                    SharedPreferencesOperations.updateSharedPreferences(cityInfo, this);
                     startActivity(new Intent(this, MainActivity.class));
                 }
                 break;

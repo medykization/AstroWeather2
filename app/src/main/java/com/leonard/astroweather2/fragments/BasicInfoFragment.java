@@ -7,10 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.leonard.astroweather2.R;
-import com.leonard.astroweather2.models.settings.Data;
+import com.leonard.astroweather2.models.settings.City;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 public class BasicInfoFragment extends Fragment {
@@ -18,6 +19,9 @@ public class BasicInfoFragment extends Fragment {
     private TextView longitude;
     private TextView latitude;
     private TextView city;
+    private TextView temp;
+    private TextView pressure;
+    private TextClock textClock;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,19 +33,21 @@ public class BasicInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_basic_info, container, false);
+        //textClock = view.findViewById(R.id.clock);
         longitude = view.findViewById(R.id.longitudeInfo);
         latitude = view.findViewById(R.id.latitudeInfo);
         city = view.findViewById(R.id.city);
+        temp = view.findViewById(R.id.temp);
+        pressure = view.findViewById(R.id.pressure);
         setTexts();
         return view;
     }
 
     private void setTexts() {
-        Data data = SharedPreferencesOperations.loadData(this.getContext());
-        System.out.println(data.toString());
-        longitude.setText(data.getLongitude());
-        latitude.setText(data.getLatitude());
-        city.setText(data.getName());
+        City cityInfo = SharedPreferencesOperations.loadCity(this.getContext());
+        longitude.setText(cityInfo.getLongitude());
+        latitude.setText(cityInfo.getLatitude());
+        city.setText(cityInfo.getName());
     }
 
 }

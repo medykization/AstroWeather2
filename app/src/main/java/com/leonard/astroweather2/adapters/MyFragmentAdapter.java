@@ -9,6 +9,7 @@ import com.leonard.astroweather2.fragments.BasicInfoFragment;
 import com.leonard.astroweather2.fragments.ExtendWeatherInfoFragment;
 import com.leonard.astroweather2.fragments.MoonFragment;
 import com.leonard.astroweather2.fragments.SunFragment;
+import com.leonard.astroweather2.fragments.WeatherForecastFragment;
 
 public class MyFragmentAdapter extends FragmentPagerAdapter {
 
@@ -28,9 +29,16 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
                 return new MoonFragment();
             case 3:
                 return new ExtendWeatherInfoFragment();
+            case 4:
+                return new WeatherForecastFragment();
             default:
                 return null;
         }
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
     }
 
     @Override

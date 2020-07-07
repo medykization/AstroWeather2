@@ -11,15 +11,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.leonard.astroweather2.models.enums.SecretData;
 import com.leonard.astroweather2.models.settings.City;
+import com.leonard.astroweather2.models.settings.JSONFileUtils;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class WeatherInfoUtils {
 
 
-    public static void UpdateWeatherInfo(final Context context, final String cityName) {
+    public static void updateWeatherInfo(final Context context, final String cityName) {
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + SecretData.valueOf("API_KEY").getVal();
 
         System.out.println(url);
@@ -35,7 +37,8 @@ public class WeatherInfoUtils {
                                     response.getInt("visibility"),
                                     response.getInt("id"),
                                     response.getJSONObject("main").getInt("humidity"),
-                                    response.getJSONObject("wind").getInt("speed"),
+                                    response.getJSONObject("wind").getDouble("speed"),
+                                    response.getJSONObject("main").getDouble("temp"),
                                     response.getJSONObject("main").getInt("pressure"),
                                     response.getJSONObject("coord").getString("lon"),
                                     response.getJSONObject("coord").getString("lat"));
@@ -54,6 +57,32 @@ public class WeatherInfoUtils {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(jsonObjectRequest);
+    }
+
+    public static void updateWeatherForecastInfo(final Context context, final String cityName) {
+
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + SecretData.valueOf("API_KEY").getVal();
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray result = response.getJSONArray("list");
+                            JSONFileUtils.saveForecastInfo(result, context);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Incorrect city name cannot get forecast info", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(jsonObjectRequest);
+
     }
 
 }

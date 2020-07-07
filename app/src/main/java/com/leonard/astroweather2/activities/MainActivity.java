@@ -5,7 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,8 +13,6 @@ import android.view.View;
 
 import com.leonard.astroweather2.adapters.MyFragmentAdapter;
 import com.leonard.astroweather2.models.Conections.Internet;
-import com.leonard.astroweather2.models.enums.DataNames;
-import com.leonard.astroweather2.models.settings.Data;
 import com.leonard.astroweather2.R;
 
 
@@ -23,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ViewPager viewPager;
+
+    private MyFragmentAdapter myFragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new MyFragmentAdapter(getSupportFragmentManager()));
+        myFragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(myFragmentAdapter);
+
         //System.out.println(Internet.isInternetAvailable(this));
     }
 

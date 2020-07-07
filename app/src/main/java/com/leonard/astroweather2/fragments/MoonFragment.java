@@ -1,6 +1,5 @@
 package com.leonard.astroweather2.fragments;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,11 +13,8 @@ import android.widget.TextView;
 import com.astrocalculator.AstroCalculator;
 import com.leonard.astroweather2.R;
 import com.leonard.astroweather2.models.astro_info.Info;
-import com.leonard.astroweather2.models.enums.DataNames;
-import com.leonard.astroweather2.models.settings.Data;
+import com.leonard.astroweather2.models.settings.City;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
-
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class MoonFragment extends Fragment {
@@ -50,10 +46,10 @@ public class MoonFragment extends Fragment {
         phase = view.findViewById(R.id.phase);
         synodic_month_day = view.findViewById(R.id.synodic_month_day);
 
-        Data data  = SharedPreferencesOperations.loadData(this.getContext());
-        Info info = new Info(data.getLongitude(),data.getLatitude());
+        City cityInfo  = SharedPreferencesOperations.loadCity(this.getContext());
+        Info info = new Info(cityInfo.getLongitude(),cityInfo.getLatitude());
         setText(info.getMoonInfo());
-        refreshData(info, data.getDelay());
+        refreshData(info, cityInfo.getDelay());
 
         return view;
     }

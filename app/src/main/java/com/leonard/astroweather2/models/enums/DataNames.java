@@ -1,6 +1,7 @@
 package com.leonard.astroweather2.models.enums;
 
 public enum DataNames {
+    FORECAST_FILE,
     SETTINGS,
     LONGITUDE,
     LATITUDE,
@@ -11,5 +12,6 @@ public enum DataNames {
     WIND_DIRECTION,
     VISIBILITY,
     HUMIDITY,
-    PRESSURE
+    PRESSURE,
+    TEMP,
 }
