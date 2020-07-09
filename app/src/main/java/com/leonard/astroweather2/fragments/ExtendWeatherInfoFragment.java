@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.leonard.astroweather2.R;
-import com.leonard.astroweather2.models.settings.City;
+import com.leonard.astroweather2.models.data_models.City;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 public class ExtendWeatherInfoFragment extends Fragment {

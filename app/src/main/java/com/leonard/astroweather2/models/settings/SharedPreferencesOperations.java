@@ -3,6 +3,7 @@ package com.leonard.astroweather2.models.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.leonard.astroweather2.models.data_models.City;
 import com.leonard.astroweather2.models.enums.DataNames;
 
 import static android.content.Context.MODE_PRIVATE;

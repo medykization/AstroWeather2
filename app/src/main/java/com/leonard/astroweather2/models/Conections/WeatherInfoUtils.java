@@ -10,8 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.leonard.astroweather2.models.enums.SecretData;
-import com.leonard.astroweather2.models.settings.City;
-import com.leonard.astroweather2.models.settings.JSONFileUtils;
+import com.leonard.astroweather2.models.data_models.City;
+import com.leonard.astroweather2.models.JSONUtils.JSONFile;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 import org.json.JSONArray;
@@ -68,7 +68,7 @@ public class WeatherInfoUtils {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray result = response.getJSONArray("list");
-                            JSONFileUtils.saveForecastInfo(result, context);
+                            JSONFile.saveForecastInfo(result, context);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

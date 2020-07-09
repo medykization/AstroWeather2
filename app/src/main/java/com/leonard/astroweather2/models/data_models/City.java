@@ -1,4 +1,4 @@
-package com.leonard.astroweather2.models.settings;
+package com.leonard.astroweather2.models.data_models;
 
 public class City {
 

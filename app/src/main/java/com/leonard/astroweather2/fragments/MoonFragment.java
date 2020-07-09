@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.astrocalculator.AstroCalculator;
 import com.leonard.astroweather2.R;
 import com.leonard.astroweather2.models.astro_info.Info;
-import com.leonard.astroweather2.models.settings.City;
+import com.leonard.astroweather2.models.data_models.City;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 

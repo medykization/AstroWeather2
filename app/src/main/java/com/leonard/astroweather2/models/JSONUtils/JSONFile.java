@@ -1,4 +1,4 @@
-package com.leonard.astroweather2.models.settings;
+package com.leonard.astroweather2.models.JSONUtils;
 
 import android.content.Context;
 
@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-public class JSONFileUtils {
+public class JSONFile {
 
     public static void saveForecastInfo (JSONArray array, Context context) {
         try {
