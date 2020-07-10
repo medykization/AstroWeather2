@@ -19,12 +19,18 @@ public class JSONParser {
 
         for(int i = 0; i < 45; i += 9) {
             JSONObject tmp = null;
+            String cityName = null;
             try {
                 tmp = array.getJSONObject(i);
+                dayInfos.add(new DayInfo(cityName,
+                        tmp.getString("dt_txt"),
+                        tmp.getJSONObject("weather").getString("main"),
+                        tmp.getJSONObject("main").getDouble("temp"),
+                        tmp.getJSONObject("main").getDouble("pressure"),
+                        tmp.getJSONObject("main").getDouble("humidity")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            dayInfos.add(new DayInfo());
 
         }
         return dayInfos;

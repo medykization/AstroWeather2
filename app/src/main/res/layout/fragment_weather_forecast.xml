@@ -23,7 +23,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:text="Moonrise"
+                android:id="@+id/first_day_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
@@ -43,7 +43,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:text="Moonrise"
+                android:id="@+id/second_day_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
@@ -63,7 +63,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:text="Moonrise"
+                android:id="@+id/third_day_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
@@ -83,7 +83,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:text="Moonrise"
+                android:id="@+id/fourth_day_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
@@ -103,7 +103,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:text="Moonrise"
+                android:id="@+id/fifth_day_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
