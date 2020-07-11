@@ -12,9 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.leonard.astroweather2.adapters.MyFragmentAdapter;
-import com.leonard.astroweather2.models.Conections.Internet;
 import com.leonard.astroweather2.R;
-
+import com.leonard.astroweather2.models.JSONUtils.JSONFile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         myFragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myFragmentAdapter);
 
+
+        JSONFile.saveForecastInfo();
         //System.out.println(Internet.isInternetAvailable(this));
     }
 

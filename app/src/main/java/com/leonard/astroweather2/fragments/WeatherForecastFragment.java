@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leonard.astroweather2.R;
+import com.leonard.astroweather2.models.JSONUtils.JSONParser;
+import com.leonard.astroweather2.models.data_models.DayInfo;
+
+import java.util.List;
 
 public class WeatherForecastFragment extends Fragment {
 
@@ -52,6 +56,6 @@ public class WeatherForecastFragment extends Fragment {
     }
 
     private void setUpValues() {
-        
+        List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext());
     }
 }
