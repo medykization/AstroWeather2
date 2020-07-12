@@ -61,13 +61,14 @@ public class WeatherInfoUtils {
 
     public static void updateWeatherForecastInfo(final Context context, final String cityName) {
 
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + SecretData.valueOf("API_KEY").getVal();
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + SecretData.valueOf("API_KEY").getVal();
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray result = response.getJSONArray("list");
+                            System.out.println(result != null);
                             JSONFile.saveForecastInfo(result, context);
                         } catch (JSONException e) {
                             e.printStackTrace();

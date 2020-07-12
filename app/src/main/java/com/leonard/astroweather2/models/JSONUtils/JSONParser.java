@@ -24,7 +24,7 @@ public class JSONParser {
                 tmp = array.getJSONObject(i);
                 daysInfo.add(new DayInfo(cityName,
                         tmp.getString("dt_txt"),
-                        tmp.getJSONObject("weather").getString("main"),
+                        tmp.getJSONArray("weather").getString(1),
                         tmp.getJSONObject("main").getDouble("temp"),
                         tmp.getJSONObject("main").getDouble("pressure"),
                         tmp.getJSONObject("main").getDouble("humidity")));

@@ -52,10 +52,15 @@ public class WeatherForecastFragment extends Fragment {
         fourth_day_info = view.findViewById(R.id.fourth_day_info);
         fifth_day_info = view.findViewById(R.id.fifth_day_info);
 
+        setUpValues();
+
         return view;
     }
 
     private void setUpValues() {
         List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext());
+
+        first_day_info.setText(daysInfo.get(0).getName());
+
     }
 }

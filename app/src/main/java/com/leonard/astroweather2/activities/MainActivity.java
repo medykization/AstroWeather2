@@ -13,7 +13,9 @@ import android.view.View;
 
 import com.leonard.astroweather2.adapters.MyFragmentAdapter;
 import com.leonard.astroweather2.R;
-import com.leonard.astroweather2.models.JSONUtils.JSONFile;
+import com.leonard.astroweather2.models.Conections.WeatherInfoUtils;
+import com.leonard.astroweather2.models.data_models.City;
+import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         myFragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myFragmentAdapter);
 
-
-        JSONFile.saveForecastInfo();
+        City city = SharedPreferencesOperations.loadCity(this);
+        WeatherInfoUtils.updateWeatherForecastInfo(this, city.getName());
         //System.out.println(Internet.isInternetAvailable(this));
     }
 
