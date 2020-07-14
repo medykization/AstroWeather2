@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.leonard.astroweather2.R;
 import com.leonard.astroweather2.models.JSONUtils.JSONParser;
+import com.leonard.astroweather2.models.data_models.City;
 import com.leonard.astroweather2.models.data_models.DayInfo;
+import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
 import java.util.List;
 
@@ -58,9 +60,16 @@ public class WeatherForecastFragment extends Fragment {
     }
 
     private void setUpValues() {
-        List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext());
+        City city = SharedPreferencesOperations.loadCity(this.getContext());
+        List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext(),city.getName());
 
-        first_day_info.setText(daysInfo.get(0).getName());
+        first_day.setImageResource(R.drawable.cloudy_havyrain);
+
+        first_day_info.setText(daysInfo.get(0).getWeather());
+        second_day_info.setText(daysInfo.get(1).getWeather());
+        third_day_info.setText(daysInfo.get(2).getWeather());
+        fourth_day_info.setText(daysInfo.get(3).getWeather());
+        fifth_day_info.setText(daysInfo.get(4).getWeather());
 
     }
 }
