@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         City city = SharedPreferencesOperations.loadCity(this);
         WeatherInfoUtils.updateWeatherForecastInfo(this, city.getName());
+        WeatherInfoUtils.updateWeatherInfo(this,city.getName());
         //System.out.println(Internet.isInternetAvailable(this));
     }
 

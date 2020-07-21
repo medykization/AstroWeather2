@@ -19,6 +19,7 @@ public class JSONFile {
         try {
             FileOutputStream fOut = context.openFileOutput(DataNames.FORECAST_FILE.toString() + ".json",Context.MODE_PRIVATE);
             fOut.write(array.toString().getBytes());
+            fOut.flush();
             fOut.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -30,14 +31,13 @@ public class JSONFile {
     public static JSONArray getForecastInfo (Context context) {
         JSONArray result = null;
         try {
-            FileInputStream fin = context.openFileInput(DataNames.FORECAST_FILE.toString());
-            int c;
-            String temp="";
-            while( (c = fin.read()) != -1){
-                temp = temp + Character.toString((char)c);
-            }
+            FileInputStream fin = context.openFileInput(DataNames.FORECAST_FILE.toString() + ".json");
+            int size = fin.available();
+            byte[] buffer = new byte[size];
+            fin.read(buffer);
             fin.close();
-            result = new JSONArray(temp);
+            System.out.println(new String(buffer));
+            result = new JSONArray(new String(buffer));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

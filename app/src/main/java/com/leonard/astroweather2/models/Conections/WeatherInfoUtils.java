@@ -24,8 +24,6 @@ public class WeatherInfoUtils {
     public static void updateWeatherInfo(final Context context, final String cityName) {
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + SecretData.valueOf("API_KEY").getVal();
 
-        System.out.println(url);
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override

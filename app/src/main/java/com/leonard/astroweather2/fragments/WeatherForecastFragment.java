@@ -71,26 +71,22 @@ public class WeatherForecastFragment extends Fragment {
         City city = SharedPreferencesOperations.loadCity(this.getContext());
         List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext(),city.getName());
 
-        /*
-        Drawable drawable = getResources().getDrawable(getResources()
-                .getIdentifier("r10d", "drawable",this.getContext().getPackageName()));
-
-        City city = SharedPreferencesOperations.loadCity(this.getContext());
-        List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext(),city.getName());
-
-        first_day.setImageDrawable(drawable);
-        second_day.setImageDrawable(drawable);
-        third_day.setImageDrawable(drawable);
-        fourth_day.setImageDrawable(drawable);
-        fifth_day.setImageDrawable(drawable);
+        first_day.setImageDrawable(getResources().getDrawable(getResources()
+                .getIdentifier(daysInfo.get(0).getWeatherIcon(), "drawable",this.getContext().getPackageName())));
+        second_day.setImageDrawable(getResources().getDrawable(getResources()
+                .getIdentifier(daysInfo.get(1).getWeatherIcon(), "drawable",this.getContext().getPackageName())));
+        third_day.setImageDrawable(getResources().getDrawable(getResources()
+                .getIdentifier(daysInfo.get(2).getWeatherIcon(), "drawable",this.getContext().getPackageName())));
+        fourth_day.setImageDrawable(getResources().getDrawable(getResources()
+                .getIdentifier(daysInfo.get(3).getWeatherIcon(), "drawable",this.getContext().getPackageName())));
+        fifth_day.setImageDrawable(getResources().getDrawable(getResources()
+                .getIdentifier(daysInfo.get(4).getWeatherIcon(), "drawable",this.getContext().getPackageName())));
 
         first_day_info.setText(daysInfo.get(0).getDescription() + " " + daysInfo.get(0).getDate());
         second_day_info.setText(daysInfo.get(1).getDescription() + " " + daysInfo.get(1).getDate());
         third_day_info.setText(daysInfo.get(2).getDescription() + " " + daysInfo.get(2).getDate());
         fourth_day_info.setText(daysInfo.get(3).getDescription() + " " + daysInfo.get(3).getDate());
         fifth_day_info.setText(daysInfo.get(4).getDescription() + " " + daysInfo.get(4).getDate());
-
-         */
 
     }
 

@@ -23,7 +23,7 @@ public class JSONParser {
                 tmp = array.getJSONObject(i);
                 daysInfo.add(new DayInfo(cityName,
                         tmp.getString("dt_txt"),
-                        "r" + tmp.getJSONArray("weather").getJSONObject(0).getString("icon") + ".png",
+                        "r" + tmp.getJSONArray("weather").getJSONObject(0).getString("icon"),
                         tmp.getJSONArray("weather").getJSONObject(0).getString("description"),
                         tmp.getJSONObject("main").getDouble("temp"),
                         tmp.getJSONObject("main").getDouble("pressure"),
