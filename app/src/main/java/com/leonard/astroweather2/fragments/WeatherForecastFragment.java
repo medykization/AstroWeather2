@@ -1,5 +1,7 @@
 package com.leonard.astroweather2.fragments;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +18,12 @@ import com.leonard.astroweather2.models.data_models.City;
 import com.leonard.astroweather2.models.data_models.DayInfo;
 import com.leonard.astroweather2.models.settings.SharedPreferencesOperations;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class WeatherForecastFragment extends Fragment {
 
@@ -60,16 +67,34 @@ public class WeatherForecastFragment extends Fragment {
     }
 
     private void setUpValues() {
+
         City city = SharedPreferencesOperations.loadCity(this.getContext());
         List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext(),city.getName());
 
-        first_day.setImageResource(R.drawable.cloudy_havyrain);
+        /*
+        Drawable drawable = getResources().getDrawable(getResources()
+                .getIdentifier("r10d", "drawable",this.getContext().getPackageName()));
 
-        first_day_info.setText(daysInfo.get(0).getWeather());
-        second_day_info.setText(daysInfo.get(1).getWeather());
-        third_day_info.setText(daysInfo.get(2).getWeather());
-        fourth_day_info.setText(daysInfo.get(3).getWeather());
-        fifth_day_info.setText(daysInfo.get(4).getWeather());
+        City city = SharedPreferencesOperations.loadCity(this.getContext());
+        List<DayInfo> daysInfo = JSONParser.getForecastInfoFromJSON(this.getContext(),city.getName());
+
+        first_day.setImageDrawable(drawable);
+        second_day.setImageDrawable(drawable);
+        third_day.setImageDrawable(drawable);
+        fourth_day.setImageDrawable(drawable);
+        fifth_day.setImageDrawable(drawable);
+
+        first_day_info.setText(daysInfo.get(0).getDescription() + " " + daysInfo.get(0).getDate());
+        second_day_info.setText(daysInfo.get(1).getDescription() + " " + daysInfo.get(1).getDate());
+        third_day_info.setText(daysInfo.get(2).getDescription() + " " + daysInfo.get(2).getDate());
+        fourth_day_info.setText(daysInfo.get(3).getDescription() + " " + daysInfo.get(3).getDate());
+        fifth_day_info.setText(daysInfo.get(4).getDescription() + " " + daysInfo.get(4).getDate());
+
+         */
+
+    }
+
+    private void chooseWeatherIcon(ImageView imageView, String dateInString, String weather) throws ParseException {
 
     }
 }

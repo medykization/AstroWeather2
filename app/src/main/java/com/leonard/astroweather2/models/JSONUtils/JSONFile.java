@@ -17,7 +17,7 @@ public class JSONFile {
 
     public static void saveForecastInfo (JSONArray array, Context context) {
         try {
-            FileOutputStream fOut = context.openFileOutput(DataNames.FORECAST_FILE.toString(),Context.MODE_PRIVATE);
+            FileOutputStream fOut = context.openFileOutput(DataNames.FORECAST_FILE.toString() + ".json",Context.MODE_PRIVATE);
             fOut.write(array.toString().getBytes());
             fOut.close();
         } catch (FileNotFoundException e) {
